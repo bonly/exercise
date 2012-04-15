@@ -1,4 +1,4 @@
-FilePre=20100416
+FilePre=20100423
 
 #export CPATH=/usr/local/include:$(HOME)/ACE_wrappers/:/cygdrive/d/boost_1_36_0:$(HOME)/src/include:/cygdrive/d/oracle/oci/include
 #export LIBRARY_PATH=/cygdrive/d/boost_1_37_0/stage/lib:$HOME/usr/w32api/lib:/usr/local/lib:$(HOME)/ACE_wrappers/lib:/cygdrive/d/oracle/oci/lib/msvc
@@ -7,7 +7,7 @@ MHOME=E:/mingw/msys/1.0/home/Bonly
 #if use wssocket add -l ws2_32 -l mswsock -D__USE_W32_SOCKETS
 WIN_SOCK_LIB=-l ws2_32 -l mswsock -l boost_system-gcc34-mt-1_36.dll
 
-LIBS= 
+LIBS= wtsapi32 advapi32 netapi32
 #mingw32 
 #glu32 glut32 opengl32 (for opengl)
 #boost_thread-gcc34-mt-1_37 boost_date_time-gcc34-mt-1_37
@@ -15,24 +15,24 @@ LIBS=
 #boost_system-gcc34-mt-1_37 
 
 INC = 
-#"E:\mingw\lib\gcc\mingw32\4.6.1\include\c++" e:/mingw/include e:/workspace/box D:\BREW\inc "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\Include\gl"
+#"E:\mingw\lib\gcc\mingw32\4.6.2\include\c++" e:/mingw/include e:/workspace/box D:\BREW\inc "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\Include\gl"
 CFLAGS=-O0 -g3 -Wall -fmessage-length=0
 #-console -mwindows 
 #-Wl,--whole-archive
 #-enable-auto-import 
 
-CXXFLAGS= $(CFLAGS)
+CXXFLAGS= $(CFLAGS) -D_WIN32_WINNT=0x0501
 #-D__USE_W32_SOCKETS
 #-m32 32bit
 #-m64 64bit
-CXX = g++
+CXX = g++ -fno-omit-frame-pointer
 
 WIN_LIB=-l kernel32 -l user32 -l gdi32 -lwinmm -ldxguid
 
 LIBPATH_BOOST=
 #-L /cygdrive/d/boost_1_37_0/stage/lib
 
-LIBPATH=  /e/mingw/lib E:\temp\Box2D D:\SDL-1.2.15\build\.libs
+LIBPATH= /e/mingw/lib E:/temp/Box2D D:/SDL-1.2.15/build/.libs 
 #E:/mingw/lib e:/workspace/Box2D/Debug E:/workspace/glui/Debug E:/workspace/freeglut/Debug
 #-L $(HOME)/usr/w32api/lib
 

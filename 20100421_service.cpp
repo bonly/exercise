@@ -1,11 +1,4 @@
 /**
- *  @file 20100423_keep_chrome_open.cpp
- *
- *  @date 2012-3-12
- *  @Author: Bonly
- */
-
-/**
  *  @file 20100421_service.cpp
  *
  *  @date 2012-3-12
@@ -13,11 +6,10 @@
  */
 
 #include <windows.h>
-#include <TlHelp32.h>
 #include <stdio.h>
 
 #define SLEEP_TIME 5000
-#define LOGFILE "C:/keep_chrome_open.log"
+#define LOGFILE "C:/Temp/emestatus.txt"
 
 int WriteToLog(const char* str)
 {
@@ -36,18 +28,19 @@ SERVICE_STATUS_HANDLE hStatus;
 void ServiceMain(int argc, char* argv[]);
 void ControlHandler(DWORD request);
 int InitService();
-int KeepChromeOpen();
 
 int main()
 {
+  WriteToLog("main\n");
   SERVICE_TABLE_ENTRY ServiceTable[2];
-  ServiceTable[0].lpServiceName = (LPSTR)"Keep_chrome_open";
+  ServiceTable[0].lpServiceName = (LPSTR)"MemoryStatus";
   ServiceTable[0].lpServiceProc = (LPSERVICE_MAIN_FUNCTION)ServiceMain;
 
   ServiceTable[1].lpServiceName = NULL;
   ServiceTable[1].lpServiceProc = NULL;
 
   StartServiceCtrlDispatcher (ServiceTable); ///启动服务的控制分派机线程
+  WriteToLog("main end\n");
   return 0;
 }
 
@@ -56,6 +49,7 @@ int main()
  */
 void ServiceMain(int argc, char* argv[])
 {
+  WriteToLog("Service main\n");
   int error;
   ServiceStatus.dwServiceType = SERVICE_WIN32; ///服务类型，固定
   ServiceStatus.dwCurrentState = SERVICE_START_PENDING; ///当前状态
@@ -66,7 +60,7 @@ void ServiceMain(int argc, char* argv[])
   ServiceStatus.dwWaitHint = 0; ///初始化服务需30秒以上时的提示
 
   hStatus = RegisterServiceCtrlHandler( ///注册处理函数
-      "CheckChrome",
+      "MemoryStatus",
       (LPHANDLER_FUNCTION) ControlHandler);
   if (hStatus == (SERVICE_STATUS_HANDLE)0)
   {
@@ -76,7 +70,6 @@ void ServiceMain(int argc, char* argv[])
   error = InitService(); ///初始化服务
   if (error)
   {
-    WriteToLog("Service Init failed\n");
     ServiceStatus.dwCurrentState = SERVICE_STOPPED; ///初始化失败
     ServiceStatus.dwWin32ExitCode = -1;
     SetServiceStatus (hStatus, &ServiceStatus);
@@ -86,10 +79,14 @@ void ServiceMain(int argc, char* argv[])
   ServiceStatus.dwCurrentState = SERVICE_RUNNING; ///向SCM报告服务状态
   SetServiceStatus (hStatus, &ServiceStatus);
 
+  MEMORYSTATUS memory;
   while (ServiceStatus.dwCurrentState == SERVICE_RUNNING)
   {
-    int result = KeepChromeOpen();
-    if (result!=0)
+    char buffer[16];
+    GlobalMemoryStatus(&memory);
+    sprintf(buffer, "%ld", memory.dwAvailPhys);
+    int result = WriteToLog(buffer);
+    if (result)
     {
       ServiceStatus.dwCurrentState = SERVICE_STOPPED;
       ServiceStatus.dwWin32ExitCode = -1;
@@ -97,6 +94,7 @@ void ServiceMain(int argc, char* argv[])
       return;
     }
     Sleep(SLEEP_TIME);
+    WriteToLog("while\n");
   }
   return;
 }
@@ -106,15 +104,7 @@ void ServiceMain(int argc, char* argv[])
  */
 void ControlHandler(DWORD dwCode)
 {
-  switch(dwCode)
-  {
-    case SERVICE_CONTROL_STOP:
-      WriteToLog("Stoping service\n");
-      ServiceStatus.dwCurrentState = SERVICE_STOP;
-      ServiceStatus.dwWin32ExitCode = 0;
-      SetServiceStatus (hStatus, &ServiceStatus);
-      break;
-  }
+  WriteToLog("Service control\n");
 }
 
 int InitService()
@@ -122,47 +112,3 @@ int InitService()
   WriteToLog("Service init\n");
   return 0;
 }
-
-int KeepChromeOpen()
-{
-
-  HANDLE  hSnapshot;
-  int count = 0;
-  hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);  //创建快照
-  if(INVALID_HANDLE_VALUE == hSnapshot)
-  {
-    WriteToLog("CreateToolhelp32Snapshot call faild!\n");
-    return 1;
-  }
-
-  PROCESSENTRY32 process;
-  process.dwSize = sizeof(PROCESSENTRY32);   //注意 必不可少
-  BOOL first = ::Process32First(hSnapshot,&process);
-
-  bool found = false;
-  while(first)     //循环 列出进程信息
-  {
-    ++count;
-    if(strstr(process.szExeFile, "chrome.exe")!=0)
-    {
-      found = true;
-      break;
-    }
-    first = ::Process32Next(hSnapshot,&process);
-  }
-
-  ::CloseHandle(hSnapshot);
-  if (!found)
-  {
-  //system("Chrome --kiosk");
-    if(0!=system("D:\\Chrome\\Chrome\\GoogleChromePortable.exe --kiosk"))
-    {
-      char buff[255]="";
-      strncpy(buff,strerror(errno),255);
-      WriteToLog(buff);
-    }
-  }
-  return 0;
-}
-
-

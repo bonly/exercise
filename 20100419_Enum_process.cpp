@@ -14,7 +14,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    HANDLE  hSnapshot;
+  HANDLE  hSnapshot;
   int count = 0;
   hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);  //创建快照
   if(INVALID_HANDLE_VALUE == hSnapshot)
