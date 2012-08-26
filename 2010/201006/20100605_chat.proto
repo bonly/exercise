@@ -1,0 +1,7 @@
+import "20100603_chat.proto";
+
+message ACTION{
+   required ID from_id = 1;
+   required ID to_id = 2;
+   required int32 action = 3;
+}

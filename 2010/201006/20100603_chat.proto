@@ -1,0 +1,22 @@
+//@max_string_length=127
+//@max_repeated_length=127
+
+enum Kind{
+   PEOPLE_ID = 0;
+   GROUP_ID = 1;
+}
+
+message ID{
+   required Kind type = 1;
+   required int32 key = 2;
+}
+
+message MSG{
+   required string msg = 1;
+}
+
+message Talk{
+   required ID from_id = 1;
+   required ID to_id = 2;
+   required MSG say = 3;
+}

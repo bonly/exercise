@@ -1,0 +1,10 @@
+//@max_string_length=20
+//@max_repeated_length=100
+
+enum st{
+    good = 1;
+    bad = 2;
+}
+message Heartbeat{
+  required st stat = 1;
+}

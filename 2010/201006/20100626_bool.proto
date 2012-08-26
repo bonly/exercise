@@ -1,0 +1,6 @@
+//@max_string_length=20
+//@max_repeated_length=100
+
+message Heartbeat{
+  required bool stat = 1;
+}
