@@ -1,0 +1,192 @@
+0000000   #   i   n   c   l   u   d   e       <   s   t   r   i   n   g
+0000020   >  \r  \n   #   i   n   c   l   u   d   e       <   s   t   r
+0000040   i   n   g   .   h   >  \r  \n   u   s   i   n   g       n   a
+0000060   m   e   s   p   a   c   e       s   t   d   ;  \r  \n  \r  \n
+0000100   c   l   a   s   s       C   C   h   i   n   e   s   e   C   o
+0000120   d   e   {  \r  \n   p   u   b   l   i   c   :  \r  \n      \r
+0000140  \n                   s   t   a   t   i   c       v   o   i   d
+0000160       U   T   F   _   8   T   o   U   n   i   c   o   d   e   (
+0000200   w   c   h   a   r   _   t   *       p   O   u   t   ,   c   h
+0000220   a   r       *   p   T   e   x   t   )   ;           /   /    
+0000240 260 321   U   T   F   -   8 327 252 273 273 263 311   U   n   i
+0000260   c   o   d   e  \r  \n                   s   t   a   t   i   c
+0000300       v   o   i   d       U   n   i   c   o   d   e   T   o   U
+0000320   T   F   _   8   (   c   h   a   r   *       p   O   u   t   ,
+0000340   w   c   h   a   r   _   t   *       p   T   e   x   t   )   ;
+0000360           /   /   U   n   i   c   o   d   e     327 252 273 273
+0000400 263 311   U   T   F   -   8  \r  \n                   s   t   a
+0000420   t   i   c       v   o   i   d       U   n   i   c   o   d   e
+0000440   T   o   G   B   2   3   1   2   (   c   h   a   r   *       p
+0000460   O   u   t   ,   w   c   h   a   r   _   t       u   D   a   t
+0000500   a   )   ;           /   /     260 321   U   n   i   c   o   d
+0000520   e     327 252 273 273 263 311       G   B   2   3   1   2  \r
+0000540  \n                   s   t   a   t   i   c       v   o   i   d
+0000560       G   b   2   3   1   2   T   o   U   n   i   c   o   d   e
+0000600   (   w   c   h   a   r   _   t   *       p   O   u   t   ,   c
+0000620   h   a   r       *   g   b   B   u   f   f   e   r   )   ;   /
+0000640   /       G   B   2   3   1   2     327 252 273 273 263 311 241
+0000660 241   U   n   i   c   o   d   e  \r  \n                   s   t
+0000700   a   t   i   c       v   o   i   d       G   B   2   3   1   2
+0000720   T   o   U   T   F   _   8   (   s   t   r   i   n   g   &    
+0000740   p   O   u   t   ,   c   h   a   r       *   p   T   e   x   t
+0000760   ,       i   n   t       p   L   e   n   )   ;   /   /   G   B
+0001000   2   3   1   2     327 252 316 252       U   T   F   -   8  \r
+0001020  \n                   s   t   a   t   i   c       v   o   i   d
+0001040       U   T   F   _   8   T   o   G   B   2   3   1   2   (   s
+0001060   t   r   i   n   g       &   p   O   u   t   ,       c   h   a
+0001100   r       *   p   T   e   x   t   ,       i   n   t       p   L
+0001120   e   n   )   ;   /   /   U   T   F   -   8     327 252 316 252
+0001140       G   B   2   3   1   2  \r  \n   }   ;  \r  \n      \r  \n
+0001160   /   / 300 340 312 265 317 326  \r  \n   v   o   i   d       C
+0001200   C   h   i   n   e   s   e   C   o   d   e   :   :   U   T   F
+0001220   _   8   T   o   U   n   i   c   o   d   e   (   w   c   h   a
+0001240   r   _   t   *       p   O   u   t   ,   c   h   a   r       *
+0001260   p   T   e   x   t   )   {  \r  \n                   c   h   a
+0001300   r   *       u   c   h   a   r       =       (   c   h   a   r
+0001320       *   )   p   O   u   t   ;  \r  \n                   u   c
+0001340   h   a   r   [   1   ]       =       (   (   p   T   e   x   t
+0001360   [   0   ]       &       0   x   0   F   )       <   <       4
+0001400   )       +       (   (   p   T   e   x   t   [   1   ]       >
+0001420   >       2   )       &       0   x   0   F   )   ;  \r  \n    
+0001440               u   c   h   a   r   [   0   ]       =       (   (
+0001460   p   T   e   x   t   [   1   ]       &       0   x   0   3   )
+0001500       <   <       6   )       +       (   p   T   e   x   t   [
+0001520   2   ]       &       0   x   3   F   )   ;  \r  \n            
+0001540       r   e   t   u   r   n   ;  \r  \n   }  \r  \n      \r  \n
+0001560   v   o   i   d       C   C   h   i   n   e   s   e   C   o   d
+0001600   e   :   :   U   n   i   c   o   d   e   T   o   U   T   F   _
+0001620   8   (   c   h   a   r   *       p   O   u   t   ,   w   c   h
+0001640   a   r   _   t   *       p   T   e   x   t   )   {  \r  \n    
+0001660               /   /     327 242 322 342       W   C   H   A   R
+0001700 270 337 265 315 327 326 265 304 313 263 320 362   , 265 315 327
+0001720 326 275 332 324 332 307 260 243 254 270 337 327 326 275 332 324
+0001740 332 272 363  \r  \n                   c   h   a   r   *       p
+0001760   c   h   a   r       =       (   c   h   a   r       *   )   p
+0002000   T   e   x   t   ;  \r  \n                   p   O   u   t   [
+0002020   0   ]       =       (   0   x   E   0       |       (   (   p
+0002040   c   h   a   r   [   1   ]       &       0   x   F   0   )    
+0002060   >   >       4   )   )   ;  \r  \n                   p   O   u
+0002100   t   [   1   ]       =       (   0   x   8   0       |       (
+0002120   (   p   c   h   a   r   [   1   ]       &       0   x   0   F
+0002140   )       <   <       2   )   )       +       (   (   p   c   h
+0002160   a   r   [   0   ]       &       0   x   C   0   )       >   >
+0002200       6   )   ;  \r  \n                   p   O   u   t   [   2
+0002220   ]       =       (   0   x   8   0       |       (   p   c   h
+0002240   a   r   [   0   ]       &       0   x   3   F   )   )   ;  \r
+0002260  \n                   r   e   t   u   r   n   ;  \r  \n   }  \r
+0002300  \n      \r  \n   v   o   i   d       C   C   h   i   n   e   s
+0002320   e   C   o   d   e   :   :   U   n   i   c   o   d   e   T   o
+0002340   G   B   2   3   1   2   (   c   h   a   r   *       p   O   u
+0002360   t   ,   w   c   h   a   r   _   t       u   D   a   t   a   )
+0002400   {  \r  \n                   W   i   d   e   C   h   a   r   T
+0002420   o   M   u   l   t   i   B   y   t   e   (   C   P   _   A   C
+0002440   P   ,   N   U   L   L   ,   &   u   D   a   t   a   ,   1   ,
+0002460   p   O   u   t   ,   s   i   z   e   o   f   (   w   c   h   a
+0002500   r   _   t   )   ,   N   U   L   L   ,   N   U   L   L   )   ;
+0002520  \r  \n                   r   e   t   u   r   n   ;  \r  \n   }
+0002540                      \r  \n      \r  \n   v   o   i   d       C
+0002560   C   h   i   n   e   s   e   C   o   d   e   :   :   G   b   2
+0002600   3   1   2   T   o   U   n   i   c   o   d   e   (   w   c   h
+0002620   a   r   _   t   *       p   O   u   t   ,   c   h   a   r    
+0002640   *   g   b   B   u   f   f   e   r   )   {  \r  \n            
+0002660       :   :   M   u   l   t   i   B   y   t   e   T   o   W   i
+0002700   d   e   C   h   a   r   (   C   P   _   A   C   P   ,   M   B
+0002720   _   P   R   E   C   O   M   P   O   S   E   D   ,   g   b   B
+0002740   u   f   f   e   r   ,   2   ,   p   O   u   t   ,   1   )   ;
+0002760  \r  \n                   r   e   t   u   r   n       ;  \r  \n
+0003000   }  \r  \n      \r  \n   v   o   i   d       C   C   h   i   n
+0003020   e   s   e   C   o   d   e   :   :   G   B   2   3   1   2   T
+0003040   o   U   T   F   _   8   (   s   t   r   i   n   g   &       p
+0003060   O   u   t   ,   c   h   a   r       *   p   T   e   x   t   ,
+0003100       i   n   t       p   L   e   n   )   {  \r  \n            
+0003120       c   h   a   r       b   u   f   [   4   ]   ;  \r  \n    
+0003140               i   n   t       n   L   e   n   g   t   h       =
+0003160       p   L   e   n   *       3   ;  \r  \n                   c
+0003200   h   a   r   *       r   s   t       =       n   e   w       c
+0003220   h   a   r   [   n   L   e   n   g   t   h   ]   ;  \r  \n    
+0003240  \r  \n                   m   e   m   s   e   t   (   b   u   f
+0003260   ,   0   ,   4   )   ;  \r  \n                   m   e   m   s
+0003300   e   t   (   r   s   t   ,   0   ,   n   L   e   n   g   t   h
+0003320   )   ;  \r  \n      \r  \n                   i   n   t       i
+0003340       =       0   ;  \r  \n                   i   n   t       j
+0003360       =       0   ;  \r  \n                   w   h   i   l   e
+0003400   (   i       <       p   L   e   n   )   {  \r  \n            
+0003420                       /   / 310 347 271 373 312 307 323 242 316
+0003440 304 326 261 275 323 270 264 326 306 276 315 304 334  \r  \n    
+0003460                               i   f   (       *   (   p   T   e
+0003500   x   t       +       i   )       >   =       0   )   {  \r  \n
+0003520                                                   r   s   t   [
+0003540   j   +   +   ]       =       p   T   e   x   t   [   i   +   +
+0003560   ]   ;  \r  \n                                   }   e   l   s
+0003600   e   {  \r  \n                                                
+0003620           w   c   h   a   r   _   t       p   b   u   f   f   e
+0003640   r   ;  \r  \n                                                
+0003660           G   b   2   3   1   2   T   o   U   n   i   c   o   d
+0003700   e   (   &   p   b   u   f   f   e   r   ,   p   T   e   x   t
+0003720   +   i   )   ;  \r  \n                                        
+0003740                   U   n   i   c   o   d   e   T   o   U   T   F
+0003760   _   8   (   b   u   f   ,   &   p   b   u   f   f   e   r   )
+0004000   ;  \r  \n                                                    
+0004020       u   n   s   i   g   n   e   d       s   h   o   r   t    
+0004040   i   n   t       t   m   p       =       0   ;  \r  \n        
+0004060                                                   t   m   p    
+0004100   =       r   s   t   [   j   ]       =       b   u   f   [   0
+0004120   ]   ;  \r  \n                                                
+0004140           t   m   p       =       r   s   t   [   j   +   1   ]
+0004160       =       b   u   f   [   1   ]   ;  \r  \n                
+0004200                                           t   m   p       =    
+0004220   r   s   t   [   j   +   2   ]       =       b   u   f   [   2
+0004240   ]   ;  \r  \n                                                
+0004260           j       +   =       3   ;  \r  \n      \r  \n        
+0004300                                                   i       +   =
+0004320       2   ;  \r  \n      \r  \n                                
+0004340   }  \r  \n                   }  \r  \n  \r  \n                
+0004360   r   s   t   [   j   ]       =     241 257 241 257   ;  \r  \n
+0004400                   /   / 267 265 273 330 275 341 271 373  \r  \n
+0004420                   p   O   u   t       =       r   s   t   ;  \r
+0004440  \n                   d   e   l   e   t   e       [   ]   r   s
+0004460   t   ;  \r  \n                   r   e   t   u   r   n   ;  \r
+0004500  \n   }  \r  \n      \r  \n   v   o   i   d       C   C   h   i
+0004520   n   e   s   e   C   o   d   e   :   :   U   T   F   _   8   T
+0004540   o   G   B   2   3   1   2   (   s   t   r   i   n   g       &
+0004560   p   O   u   t   ,       c   h   a   r       *   p   T   e   x
+0004600   t   ,       i   n   t       p   L   e   n   )   {  \r  \n    
+0004620               c   h   a   r       *       n   e   w   B   u   f
+0004640       =       n   e   w       c   h   a   r   [   p   L   e   n
+0004660   ]   ;  \r  \n                   c   h   a   r       C   t   e
+0004700   m   p   [   4   ]   ;  \r  \n                   m   e   m   s
+0004720   e   t   (   C   t   e   m   p   ,   0   ,   4   )   ;  \r  \n
+0004740                   i   n   t       i       =   0   ;  \r  \n    
+0004760               i   n   t       j       =       0   ;  \r  \n    
+0005000  \r  \n                   w   h   i   l   e   (   i       <    
+0005020   p   L   e   n   )   {  \r  \n      \r  \n                    
+0005040               i   f   (   p   T   e   x   t       >       0   )
+0005060   {  \r  \n                                                    
+0005100                   n   e   w   B   u   f   [   j   +   +   ]    
+0005120   =       p   T   e   x   t   [   i   +   +   ]   ;  \r  \n    
+0005140                               }   e   l   s   e   {  \r  \n    
+0005160                                                       W   C   H
+0005200   A   R       W   t   e   m   p   ;  \r  \n                    
+0005220                                       U   T   F   _   8   T   o
+0005240   U   n   i   c   o   d   e   (   &   W   t   e   m   p   ,   p
+0005260   T   e   x   t       +       i   )   ;  \r  \n                
+0005300                                           U   n   i   c   o   d
+0005320   e   T   o   G   B   2   3   1   2   (   C   t   e   m   p   ,
+0005340   W   t   e   m   p   )   ;  \r  \n                            
+0005360                               n   e   w   B   u   f   [   j   ]
+0005400       =       C   t   e   m   p   [   0   ]   ;  \r  \n        
+0005420                                                   n   e   w   B
+0005440   u   f   [   j       +       1   ]       =       C   t   e   m
+0005460   p   [   1   ]   ;  \r  \n      \r  \n                        
+0005500                                   i       +   =       3   ;  \r
+0005520  \n                                                           j
+0005540       +   =       2   ;  \r  \n                                
+0005560                           }  \r  \n                            
+0005600       }  \r  \n      \r  \n                                   n
+0005620   e   w   B   u   f   [   j   ]       =     241 257 241 257   ;
+0005640  \r  \n                                   p   O   u   t       =
+0005660       n   e   w   B   u   f   ;  \r  \n                        
+0005700           d   e   l   e   t   e       [   ]   n   e   w   B   u
+0005720   f   ;  \r  \n                                   r   e   t   u
+0005740   r   n   ;  \r  \n   }  \r  \n  \r  \n
+0005752
