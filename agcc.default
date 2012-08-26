@@ -1,0 +1,71 @@
+#!/bin/bash
+#################################
+# need to adapt 
+# env setup
+################################
+#Root folder
+HOME=$HOME
+
+#JVM location
+JAVA_HOME=$HOME/jdk1_5/
+
+#Device system image
+SYS_ROOT=$HOME/cmod/out/target/product/dream_sapphire/system
+
+#Android source code
+SYS_DEV=$HOME/cmod/
+
+#Code Sourcery Toolchain location
+TOOLCHAIN_ROOT=$HOME/cmod/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/
+
+###################################
+# Include Locations
+# No need to change
+###################################
+BASE=$SYS_DEV/frameworks/base
+
+# C-Runtime
+LIBC=$SYS_DEV/bionic/libc
+
+# Math library
+LIBM=${SYS_DEV}/bionic/libm
+
+# Location of some required GCC compiler libraries
+TC=${SYS_DEV}/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/lib/gcc/arm-eabi/4.4.0/
+
+# ? Kernel headers
+KERNEL=${SYS_DEV}/kernel-msm/
+
+# GNU GZIP
+LIBZ=${SYS_DEV}/external/zlib
+
+# XML Expat parser
+EXPAT=${SYS_DEV}/external/expat/lib
+
+# Includes
+AND_INC=" -I$JAVA_HOME/include"
+AND_INC+=" -I${JAVA_HOME}/include/linux" 
+AND_INC+=" -I${LIBC}/include " 
+AND_INC+=" -I${LIBC}/arch-arm/include" 
+AND_INC+=" -I${LIBC}/kernel/arch-arm/include " 
+AND_INC+=" -I${LIBM}/include" 
+AND_INC+=" -I${BASE}/include" 
+AND_INC+=" -I${TC}/include" 
+AND_INC+=" -I${KERNEL}/include" 
+AND_INC+=" -I${KERNEL}/arch/arm/include -I${KERNEL}/arch/arm/mach-ebsa110/include" 
+AND_INC+=" -I${SYS_DEV}/system/core/include" 
+AND_INC+=" -I${LIBZ}" 
+AND_INC+=" -I${EXPAT}" 
+
+#############################################
+# Toolchain compiler command
+#############################################
+CROSS=arm-eabi-
+GCC=${CROSS}gcc
+
+# Uncomment for debugging
+echo ${GCC} -nostdinc $AND_INC $@
+
+# Go!
+${GCC} -nostdinc ${AND_INC} "$@"
+

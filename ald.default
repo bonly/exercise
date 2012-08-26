@@ -1,0 +1,44 @@
+#!/bin/bash
+###############################
+# Android Linker 
+# Need adapt 
+###############################
+HOME=$HOME
+JAVA_HOME=$HOME/jdk1_5/
+
+# System image location
+SYS_ROOT=$HOME/cmod/out/target/product/dream_sapphire/system
+
+# Code Sourcery Toolchain location
+TOOLCHAIN_ROOT=$HOME/cmod/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/
+
+#Android source code
+SYS_DEV=$HOME/cmod/
+
+# Android Toolchain libgcc.a
+LIBGCC=${SYS_DEV}/prebuilt/darwin-x86/toolchain/arm-eabi-4.4.0/lib/gcc/arm-eabi/4.4.0/libgcc.a
+
+# Linker libraries: C runtime, Math, and extra symbols
+LIBRARIES="-lc -lm ${LIBGCC}"
+
+# Library locations
+LIB_PATHS="-rpath /system/lib \
+ -rpath ${SYS_ROOT}/lib \
+ -L${SYS_ROOT}/lib \
+ -L${JAVA_HOME}/jre/lib/i386 -L."
+
+# Linker flags
+LD_FLAGS="--dynamic-linker=/system/bin/linker -nostdlib"
+
+#############################################################
+# Linker command
+#############################################################
+CROSS=arm-eabi-
+GCC=${CROSS}ld
+
+# Uncomment for debugging
+echo "${GCC} $LD_FLAGS $LIB_PATHS $@ $LIBRARIES"
+
+# Go!
+${GCC} $LD_FLAGS $LIB_PATHS $@ $LIBRARIES
+
