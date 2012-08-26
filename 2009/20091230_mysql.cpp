@@ -1,0 +1,216 @@
+//============================================================================
+// Name        : mysql.cpp
+// Author      : bonly
+// Version     :
+// Copyright   : bonly's copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+#include <cstdio>
+#include <iostream>
+#include <mysql++.h>
+//#include <boost/thread.hpp>
+#include <cstdlib>
+using namespace std;
+
+char const * db = "mysql";
+char const * server = "localhost";
+char const * user = "root";
+char const * pass = "";
+
+int simple_select ()
+{
+   mysqlpp::Connection conn(false);
+   if (conn.connect(db, server, user, pass))
+   {
+      mysqlpp::Query query = conn.query("select cl_1,cl_2,cl_7 from testdb.testmk where cl_1='Linux'");
+      //query.store();
+
+      if (mysqlpp::StoreQueryResult res = query.store())
+      {
+         //cout << "records: " << endl;
+         //for (size_t i =0; i < res.num_rows(); ++i)
+         //   cout << '\t' << res[i][0] << '\t' << res[i][1] << endl;
+      }
+      else
+      {
+         cerr << "Failed to get item list: " << query.error() << endl;
+         return 1;
+      }
+
+      cout << "finish\n";
+      return 0;
+   }
+   else
+   {
+      cerr << "DB connection failed: " << conn.error() << endl;
+      return 1;
+   }
+   return 0;
+}
+
+int select_from_merge ()
+{
+   mysqlpp::Connection conn(false);
+   if (conn.connect(db, server, user, pass))
+   {
+      mysqlpp::Query query = conn.query("select cl_1,cl_2,cl_7 from testdb.testmg where cl_1='Linux'");
+      //query.store();
+
+      if (mysqlpp::StoreQueryResult res = query.store())
+      {
+         //cout << "records: " << endl;
+         //for (size_t i =0; i < res.num_rows(); ++i)
+         //   cout << '\t' << res[i][0] << '\t' << res[i][1] << endl;
+      }
+      else
+      {
+         cerr << "Failed to get item list: " << query.error() << endl;
+         return 1;
+      }
+
+      cout << "from merge finish\n";
+      return 0;
+   }
+   else
+   {
+      cerr << "DB connection failed: " << conn.error() << endl;
+      return 1;
+   }
+   return 0;
+}
+
+int get_rand(unsigned int *se)
+{
+   /*
+   for (int i = 0 ; i<=100 ; ++i)
+   {
+      cerr << rand()%500000 << endl;
+   }
+   */
+   int result = rand_r(se)%500000;
+   //cerr << result << endl;
+   return result ;
+}
+
+int select_from_merge_by_ind (int times)
+{
+   unsigned int se =time(0);
+   srand(se);
+   mysqlpp::Connection conn(false);
+   if (conn.connect(db, server, user, pass))
+   {
+      char sql[255]="";
+      for (int i = 0; i<times; ++i)
+      {
+         sprintf(sql,"select * from testdb.testmg where id=%d",get_rand(&se));
+         mysqlpp::Query query = conn.query(sql);
+         query.store();
+         /*
+         if (mysqlpp::StoreQueryResult res = query.store())
+         {
+            //cout << "records: " << endl;
+            for (size_t i =0; i < res.num_rows(); ++i)
+               cout << '\t' << res[i][0] << '\t' << res[i][1] << '\t' << res[i][2] << endl;
+         }
+         else
+         {
+            cerr << "Failed to get item list: " << query.error() << endl;
+            return 1;
+         }
+         */
+      }
+
+      cout << "random select from merge finish\n";
+      return 0;
+   }
+   else
+   {
+      cerr << "DB connection failed: " << conn.error() << endl;
+      return 1;
+   }
+   return 0;
+}
+
+int select_from_testmk_by_ind (int times)
+{
+   unsigned int se = time(0);
+   srand(se);
+   mysqlpp::Connection conn(false);
+   if (conn.connect(db, server, user, pass))
+   {
+      char sql[255]="";
+      for (int i = 0; i<times; ++i)
+      {
+         sprintf(sql,"select * from testdb.testmk where id=%d",get_rand(&se));
+         mysqlpp::Query query = conn.query(sql);
+         query.store();
+         /*
+         if (mysqlpp::StoreQueryResult res = query.store())
+         {
+            //cout << "records: " << endl;
+            for (size_t i =0; i < res.num_rows(); ++i)
+               cout << '\t' << res[i][0] << '\t' << res[i][1] << '\t' << res[i][2] << endl;
+         }
+         else
+         {
+            cerr << "Failed to get item list: " << query.error() << endl;
+            return 1;
+         }
+         */
+      }
+
+      cout << "random select from testmk finish\n";
+      return 0;
+   }
+   else
+   {
+      cerr << "DB connection failed: " << conn.error() << endl;
+      return 1;
+   }
+   return 0;
+}
+
+
+
+int main(int argc, char* argv[])
+{
+   int select_times=5000;
+   switch( atoi(argv[1]))
+   {
+      case 0:
+         return simple_select();
+      case 1:
+         return select_from_merge();
+      case 2:
+         if(argv[2]!='\0') select_times = atoi(argv[2]);
+         return select_from_merge_by_ind(select_times);
+      case 3:
+         if(argv[2]!='\0') select_times = atoi(argv[2]);
+         return select_from_testmk_by_ind(select_times);
+      /*
+      case 4:
+      {
+         boost::thread_group thr;
+         for(int i=0; i<2; ++i)
+           thr.create_thread(boost::bind(&select_from_testmk_by_ind,select_times));
+         thr.join_all();
+      }
+      case 5:
+      {
+         boost::thread_group thr;
+         for(int i=0; i<2; ++i)
+           thr.create_thread(boost::bind(&select_from_merge_by_ind,select_times));
+         thr.join_all();
+      }
+      */
+      default:
+         break;
+   }
+   return 0;
+}
+
+
+/*
+all:
+	g++  -o mysql mysql.cpp -I/usr/local/mysql/include/ -I/home/hadoop/mysql++-3.1.0/lib -L/home/hadoop/mysql++-3.1.0/ -L/usr/local/mysql/lib -lmysqlpp -lmysqlclient 
+*/
