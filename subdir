@@ -8,7 +8,7 @@
 #SUBDIRS=`ls -d */ | grep -v 'bin' | grep -v 'lib' | grep -v 'include'`
 
 #编译指定子目录
-SUBDIRS=exercise
+SUBDIRS=src
 
 define make_subdir
  @for subdir in $(SUBDIRS) ; do \
