@@ -7,6 +7,10 @@ using namespace boost::python;
 using namespace std;
 object main_spa;
 
+/*
+import sys
+sys.path.append('./python')
+ */
 class CppClass
 {
   public:
