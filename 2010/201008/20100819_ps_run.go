@@ -34,7 +34,7 @@ func check(){
   cmd := exec.Command("GServer", "/home/bonly/workspace/GServer/Debug/bsrv.conf");
   //cmd := exec.Command("/bin/ls", "-l");
   cmd.Stdout = os.Stdout;
-  cmd.Start();
+  go cmd.Start();
 }
 
 func main(){

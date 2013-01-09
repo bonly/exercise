@@ -60,7 +60,7 @@ if __name__ == "__main__":
    ConnectDB();
    CreateDB();
    UseDb();
-   
+
    DelData();
 
    subprocess.call("""mysql -h 183.60.126.26 -ubonly \
