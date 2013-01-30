@@ -3,7 +3,7 @@
 # author bonly 
 # date  2008-02-01
 ###############################
- 
+
 #编译所有子目录
 #SUBDIRS=`ls -d */ | grep -v 'bin' | grep -v 'lib' | grep -v 'include'`
 
