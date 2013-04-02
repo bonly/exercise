@@ -1,4 +1,4 @@
-FilePre=20101127
+FilePre=20101212
 
 #export CPATH=/usr/local/include:$(HOME)/ACE_wrappers/:/cygdrive/d/boost_1_36_0:$(HOME)/src/include:/cygdrive/d/oracle/oci/include
 #export GLIBCXX_FORCE_NEW=1
@@ -15,7 +15,7 @@ FilePre=20101127
 #boost_regex-gcc34-mt-1_37 
 #boost_system-gcc34-mt-1_37 
 
-INC="/usr/include/freetype2" "/home/bonly/boost" "/usr/include/python2.7" "/home/bonly/nanopb" "/usr/local/mysql/include/" "/home/bonly/JUCE"
+INC="/home/opt/nana/include" "/usr/include/freetype2" "/home/bonly/boost" "/usr/include/python2.7" "/home/bonly/nanopb" "/usr/local/mysql/include/" "/home/bonly/JUCE"
 #"E:\mingw\lib\gcc\mingw32\4.6.2\include\c++" e:/mingw/include e:/workspace/box D:\BREW\inc "C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\Include\gl"
 CFLAGS=-O0 -g3 -Wall -fmessage-length=0 
 #-D"LINUX=1"
@@ -35,6 +35,8 @@ CXX = g++
 LIBPATH_BOOST=${HOME}/boost/stage/lib
 LIBPATH_PYTHON=/usr/lib
 LIB_PYTHON=python2.7
+LIBP_NANA=/home/opt/nana/build/bin /home/opt/nana/extrlib
+LIB_NANA=nana X11 pthread Xft png asound
 
 #/e/mingw/lib E:/temp/Box2D D:/SDL-1.2.15/build/.libs 
 #E:/mingw/lib e:/workspace/Box2D/Debug E:/workspace/glui/Debug E:/workspace/freeglut/Debug
@@ -47,8 +49,9 @@ LIB_PYTHON=python2.7
 #gtk_inc=-mms-bitfields -ID:/GTK/include/gtkmm-2.4 -ID:/GTK/lib/gtkmm-2.4/include -ID:/GTK/include/glibmm-2.4 -ID:/GTK/lib/glibmm-2.4/include -ID:/GTK/include/gdkmm-2.4 -ID:/GTK/lib/gdkmm-2.4/include -ID:/GTK/include/pangomm-1.4 -ID:/GTK/include/atkmm-1.6 -ID:/GTK/include/gtk-2.0 -ID:/GTK/include/sigc++-2.0 -ID:/GTK/lib/sigc++-2.0/include -ID:/GTK/include/glib-2.0 -ID:/GTK/lib/glib-2.0/include -ID:/GTK/lib/gtk-2.0/include -ID:/GTK/include/cairomm-1.0 -ID:/GTK/include/pango-1.0 -ID:/GTK/include/cairo -ID:/GTK/include/freetype2 -ID:/GTK/include -ID:/GTK/include/atk-1.0  
 #gtk_lib=-user32 -Wl,-luuid -LD:/GTK/lib -lgtkmm-2.4 -lgdkmm-2.4 -latkmm-1.6 -lgtk-win32-2.0 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgdk-win32-2.0 -lgdi32 -limm32 -lshell32 -lole32 -latk-1.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lpangocairo-1.0 -lcairo -lpangoft2-1.0 -lfontconfig -lfreetype -lz -lpango-1.0 -lm -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl -liconv  
 
-LIBPATH= $(LIBPATH_BOOST) $(LIBPATH_PYTHON) /usr/local/mysql/lib/
-LIBS= boost_thread boost_filesystem boost_system boost_chrono boost_date_time
+LIBPATH= $(LIBP_NANA) $(LIBPATH_BOOST) $(LIBPATH_PYTHON) /usr/local/mysql/lib/
+LIBS= $(LIB_NANA)
+#boost_filesystem boost_system boost_chrono boost_date_time
 #boost_system boost_thread boost_python-gcc47-mt-1_51 python2.7 mysqlclient_r
 
 FILES = $(wildcard $(FilePre)*.cc) $(wildcard $(FilePre)*.cpp) 
@@ -61,7 +64,7 @@ all: $(EXE)
 
 $(EXE): $(SOURCES)
 	@echo ========= building $^ ... =======
-	$(CXX) $(CXXFLAGS) $(GTK_CFG) \
+	$(CXX) $(CXXFLAGS) \
 	$(addprefix -I, $(INC))  $^ -o $@ \
 	$(addprefix -L, $(LIBPATH)) $(addprefix -l, $(LIBS)) 
 	@echo ========= Finish. $^ =======
