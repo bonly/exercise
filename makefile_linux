@@ -1,4 +1,4 @@
-FilePre=20101212
+FilePre=20110209
 
 #export CPATH=/usr/local/include:$(HOME)/ACE_wrappers/:/cygdrive/d/boost_1_36_0:$(HOME)/src/include:/cygdrive/d/oracle/oci/include
 #export GLIBCXX_FORCE_NEW=1
@@ -50,9 +50,8 @@ LIB_NANA=nana X11 pthread Xft png asound
 #gtk_lib=-user32 -Wl,-luuid -LD:/GTK/lib -lgtkmm-2.4 -lgdkmm-2.4 -latkmm-1.6 -lgtk-win32-2.0 -lpangomm-1.4 -lcairomm-1.0 -lglibmm-2.4 -lsigc-2.0 -lgdk-win32-2.0 -lgdi32 -limm32 -lshell32 -lole32 -latk-1.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0 -lpangocairo-1.0 -lcairo -lpangoft2-1.0 -lfontconfig -lfreetype -lz -lpango-1.0 -lm -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl -liconv  
 
 LIBPATH= $(LIBP_NANA) $(LIBPATH_BOOST) $(LIBPATH_PYTHON) /usr/local/mysql/lib/
-LIBS= $(LIB_NANA)
-#boost_filesystem boost_system boost_chrono boost_date_time
-#boost_system boost_thread boost_python-gcc47-mt-1_51 python2.7 mysqlclient_r
+LIBS= $(LIB_NANA) boost_filesystem boost_system boost_chrono boost_date_time boost_system boost_thread 
+#boost_python-gcc47-mt-1_51 python2.7 mysqlclient_r
 
 FILES = $(wildcard $(FilePre)*.cc) $(wildcard $(FilePre)*.cpp) 
 SOURCES = $(notdir $(FILES)) 
