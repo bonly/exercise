@@ -15,7 +15,7 @@
  as %(asm_options) %m.s %A }  }
 
 *cpp:
-%{posix:-D_POSIX_SOURCE} %{pthread:-D_REENTRANT} -std=c++11 -I/home/opt/boost -I/home/opt/nana/include
+%{posix:-D_POSIX_SOURCE} %{pthread:-D_REENTRANT} -I/home/opt/boost -I/home/opt/nana/include
 
 *cpp_options:
 %(cpp_unique_options) %1 %{m*} %{std*&ansi&trigraphs} %{W*&pedantic*} %{w} %{f*} %{g*:%{!g0:%{g*} %{!fno-working-directory:-fworking-directory}}} %{O*} %{undef} %{save-temps*:-fpch-preprocess}
