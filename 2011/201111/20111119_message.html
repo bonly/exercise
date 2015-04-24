@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+	<link rel="stylesheet" href="css/messenger.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="css/messenger-theme-future.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/messenger.js"></script>
+	<script src="js/messenger-theme-future.js" type="test/javascript"></script>	
+	<p> title</p>
+	<script type="text/javascript">
+	    function hello(){
+	    	//alert("OK");
+	  //   	Messenger.options = {
+			//     extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+			//     theme: 'flat'
+			// }
+	    	Messenger().post("Your request has succeded!");
+	    	Messenger().post({
+			  message: 'There was an explosion while processing your request.',
+			  type: 'error',
+			  showCloseButton: true
+			});
+	    }
+	</script>
+</head>
+<body>
+	<p> body</p>
+	<button onclick="hello();">ok</button>
+</body>
+</html>
