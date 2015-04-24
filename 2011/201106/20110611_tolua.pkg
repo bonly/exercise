@@ -1,0 +1,5 @@
+
+//tolua_begin
+int sum(int a, int b);
+//tolua_end
+
