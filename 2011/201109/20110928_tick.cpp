@@ -59,11 +59,14 @@ const char *const MonAry[] = {
     NULL
 };
 
+/*
+数组, 数组大小, 修正, 别名,  被解释串
+*/
 char* Tick::parseField(char *ary, int modvalue, int off,
                         const char *const *names, char *ptr){
     char *base = ptr;
-    int n1 = -1;
-    int n2 = -1;
+    int n1 = -1; //范围值的首
+    int n2 = -1; //范围值的尾
 
     if (base == NULL) {
         return (NULL);
@@ -258,3 +261,5 @@ int main(){
 }
 */
 // g++ -static -c 20110928_tick.cpp -o libtick.a
+// CREATE FUNCTION cron RETURNS STRING SONAME 'libbonly.so';
+// select cron();

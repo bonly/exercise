@@ -18,7 +18,8 @@ static CvHaarClassifierCascade* cascade = 0;
 void detect_and_draw( IplImage* image );
 
 const char* cascade_name =
-"/home/bonly/opt/opencv/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml";
+"/usr/share/opencv/haarcascades/haarcascade_frontalface_alt.xml";
+//"/home/bonly/opt/opencv/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml";
 /* "haarcascade_profileface.xml";*/
 
 int main(int argc, char* argv[])
