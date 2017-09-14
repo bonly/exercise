@@ -1,0 +1,40 @@
+task displayProperties << {
+   displaySystemProperties()
+   displayGradleProjectProperties()
+}
+
+def displaySystemProperties()
+{
+   println "\n=== System Properties ==="
+   println "Favorite Movie (1994): ${System.properties['movie.favorite.1994']}"
+   println "Favorite Movie (1996): ${System.properties['movie.favorite.1996']}" 
+   println "Favorite Movie (1997): ${System.properties['movie.favorite.1997']}"
+   println "Favorite Movie (1981): ${System.properties['movie.favorite.1981']}"
+   println "Favorite Movie (2012): ${System.properties['movie.favorite.2012']}"
+   println "Favorite Movie (2013): ${System.properties['movie.favorite.2013']}"
+}
+
+def displayGradleProjectProperties()
+{
+   println "\n=== Gradle Project Properties ==="
+   println "Favorite Movie (1994): ${getProjectProperty('movie.favorite.1994')}"
+   println "Favorite Movie (1996): ${getProjectProperty('movie.favorite.1996')}"
+   println "Favorite Movie (1997): ${getProjectProperty('movie.favorite.1997')}"
+   println "Favorite Movie (1981): ${getProjectProperty('movie.favorite.1981')}"
+   println "Favorite Movie (2012): ${getProjectProperty('movie.favorite.2012')}"
+   println "Favorite Movie (2013): ${getProjectProperty('movie.favorite.2013')}"
+}
+
+def String getProjectProperty(String propertyName)
+{
+   String movieTitle = "null"
+   if (hasProperty(propertyName))
+   {
+      movieTitle = this.properties[propertyName]
+   }
+   return movieTitle
+}
+
+/*
+gradle -b 20140408_gradle_ppt.gradle displayProperties -Pmovie.favorite.1996="Independence Day" -Dmovie.favorite.1997=Gattaca -Dorg.gradle.project.movie.favorite.1994="Shawshank Redemption"
+*/

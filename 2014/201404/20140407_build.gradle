@@ -1,0 +1,10 @@
+
+def build(){
+  print "hello\n"
+  print "aaa it is : ${aaa}\n"
+  print "bbb it is : ${bbb}\n"
+}
+
+build()
+
+// gradle -Paaa=ni -Pbbb=wo
