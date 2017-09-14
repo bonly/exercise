@@ -1,0 +1,15 @@
+<!-- index.html -->
+
+<!-- 引用header.html -->
+{{ template "header.html" .}}
+
+   {{range .data}}
+      <a href="/view/room/{{.RoomID}}">
+      	<h2>{{.Address}}</h2>
+      </a>
+
+      <p>{{.Pic}}</p>
+   {{end}}
+
+<!-- 引用 footer.html -->
+{{ template "footer.html" .}}
