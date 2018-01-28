@@ -1,0 +1,8 @@
+PROJECT=Unity-iPhone
+TARGET=Unity-iPhone
+PACKAGE=com.md.xlyx.pp
+APP=PP
+TEST_IP=\\\"test.game83.com\\\"
+PROD_IP=\\\"hero0.game83.com\\\"
+
+include ../makefile.init

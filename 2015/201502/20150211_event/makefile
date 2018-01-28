@@ -1,0 +1,2 @@
+all:
+	mcs *.cs

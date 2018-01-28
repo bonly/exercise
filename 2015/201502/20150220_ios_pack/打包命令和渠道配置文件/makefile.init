@@ -1,0 +1,73 @@
+TOP := ${PWD}/$(dir $(lastword $(MAKEFILE_LIST)))
+
+CLEAR=\x1b[0m
+GREEN=\x1b[32;01m
+RED=\x1b[31;01m
+YELLOW=\x1b[33;01m
+BLUE=\x1b[34;01m
+CYAN=\x1b[36;01m
+BOLD=\033[1m
+NORMAL=\033[0m
+
+PA:=$(shell xcodebuild -showBuildSettings -target ${TARGET} -configuration Release ONLY_ACTIVE_ARCH=NO ARCHS="armv7" | grep BUILD_ROOT | awk '{print $$3}')
+
+ifeq ($(rev), Release) 
+IP=$(PROD_IP)
+else
+IP=$(TEST_IP)
+endif
+
+ifndef dir
+dir=.none
+else
+dir=$dir
+endif
+
+all: 
+	@echo "    $(BOLD)make ipa rev=Release|Debug $(NORMAL) - build $(APP)"
+	@echo "    $(BOLD)make bdp $(NORMAL) - build $(APP) as Release "
+	@echo "    $(BOLD)make bdt $(NORMAL) - build $(APP) as Debug "
+	@echo "    $(BOLD)make cbdp $(NORMAL) - build $(APP) using  " ${PROD_IP} " as game server "
+	@echo "    $(BOLD)make cbdt $(NORMAL) - build $(APP) using " ${TEST_IP} " as game server "
+	@echo "    $(BOLD)make pkg $(NORMAL) - package $(APP).ipa "
+
+ipa:
+	mkdir -p $(TOP)/bin
+	xcodebuild -scheme $(PROJECT) PLATFORM_IP=$(IP) -configuration $(VER) ONLY_ACTIVE_ARCH=NO ARCHS="armv7" archive -archivePath $(APP).xcarchive
+	xcodebuild -exportArchive -exportFormat ipa -archivePath $(APP).xcarchive/ -exportPath $(TOP)/bin/$(PACKAGE).ipa -exportProvisioningProfile "iOSTeam Provisioning Profile: com.md.billionero"
+
+bdp: 
+	#xcodebuild clean -target $(TARGET) -configuration Release -scheme $(PROJECT) ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+	#xcodebuild -target $(TARGET) -configuration Release -scheme $(PROJECT) ONLY_ACTIVE_ARCH=NO ARCHS="arm64 armv7 armv7s"
+	xcodebuild clean -target $(TARGET) BUILD_DIR=${PA} PLATFORM_IP=${PROD_IP} -configuration Release ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+	xcodebuild -target $(TARGET) BUILD_DIR=${PA} PLATFORM_IP=${PROD_IP} -configuration Release ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+
+bdt: 
+	xcodebuild clean -target $(TARGET) BUILD_DIR=${PA} PLATFORM_IP=${TEST_IP} -configuration Debug ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+	xcodebuild -target $(TARGET) BUILD_DIR=${PA} PLATFORM_IP=${TEST_IP} -configuration Debug ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+
+cbdp: 
+	xcodebuild clean -target $(TARGET) PLATFORM_IP=${PROD_IP} -scheme $(PROJECT) -configuration Release ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+	xcodebuild -target $(TARGET) PLATFORM_IP=${PROD_IP} -scheme $(PROJECT) -configuration Release ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+
+cbdt: 
+	xcodebuild clean -target $(TARGET) -scheme $(PROJECT) PLATFORM_IP=${TEST_IP} -configuration Debug ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+	xcodebuild -target $(TARGET) PLATFORM_IP=${PROD_IP} -scheme $(PROJECT) -configuration Debug ONLY_ACTIVE_ARCH=NO ARCHS="armv7"
+
+pkg:
+	mkdir -p $(TOP)/bin
+	xcrun -sdk iphoneos PackageApplication -v $(PA)/$(APP).app -o $(TOP)/bin/$(PACKAGE).ipa --sign "iPhone Developer: LangPing Wei (6N6L6JVQ42)" -embed "test_package.mobileprovision"
+
+run:
+	xcodebuild test -destination 'id=[DEVICE ID]'
+
+clean:
+	@echo =========clean $(PA)=========
+	rm -rf $(PA)/../../../
+	rm -rf $(TOP)/bin/$(PACKAGE).ipa
+	@echo =============================
+
+dir:
+	@echo $(PA)
+
+.PHONY: dir clean pkg
