@@ -1,0 +1,91 @@
+syntax="proto3";
+
+package proto;
+
+service User {
+  rpc Login (ReqLogin) returns (RepLogin) {}
+  rpc Register (ReqRegister) returns (RepRegister){}
+}
+
+message ReqLogin {
+  uint32 Sn = 1;
+  string Name = 2;
+  string Passwd = 3;
+}
+
+message RepLogin {
+  uint32 Sn = 1;
+  string Ret = 2;
+  string Msg = 3;
+  string Id = 4;
+}
+
+message ReqRegister {
+  uint32 Sn = 1;
+  string Name = 2;
+  string Passwd = 3;
+}
+
+message RepRegister {
+  uint32 Sn = 1;
+  string Ret = 2;
+  string Msg = 3;
+  string Id = 4;
+}
+
+service Scene{
+  rpc Get (ReqKeyValue) returns (RepKeyValue) {}
+  rpc Set (ReqKeyValue) returns (Rep) {}
+}
+
+service Cards{
+  rpc Get (ReqKeyValue) returns (RepKeyValue) {}
+  rpc Set (ReqKeyValue) returns (Rep) {}
+}
+
+service Pk{
+  rpc Match(ReqMatch) returns (RepMatch){}
+}
+
+message ReqMatch{
+  uint32 Sn = 1;
+  string Id = 2;
+}
+
+message RepMatch{
+  uint32 Sn = 1;
+  string Ret = 2;
+  string Msg = 3;
+  string Data = 4;
+}
+
+message ReqKeyValue{
+  uint32 Sn = 1;
+  string Key = 2;
+  string Data = 3;
+}
+
+message RepKeyValue{
+  uint32 Sn = 1;
+  string Ret = 2;
+  string Msg = 3;  
+  string Data = 4;
+}
+
+service Stream{
+  rpc Pipe(stream Req) returns (stream Rep) {}
+}
+
+message Req{
+  uint32 Sn = 1;
+  string Key = 2;
+  string Data = 3;
+}
+
+message Rep {
+  uint32 Sn = 1;
+  string Ret = 2;
+  string Msg = 3;
+  string Data = 4;
+}
+
