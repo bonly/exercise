@@ -1,0 +1,32 @@
+.para{
+	font-size: 22px;
+	color: #f00;
+	text-align: center;
+	padding-left: 20px;
+}
+.para2{
+	font-size: 44px;
+	color: #3ed;
+	text-indent: 2em;
+	padding-left: 2em;
+}
+ /*提取html中的p来修改*/
+p.para{
+	color:#f0f;
+}
+
+p>.para{ /*没有指定时,p的默认*/
+	color:#00f;
+}
+
+p{  /*层叠是指最后的重要度最高,最后的就是默认的样式*/
+	text-align:center;
+}
+
+div#content p{ /*div中的content名的id*/
+	font-size:22px;
+}
+
+.para_bg{ /*html中可多个层叠使用*/
+	background-color: #000;
+}

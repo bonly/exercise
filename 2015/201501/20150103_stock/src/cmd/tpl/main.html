@@ -1,0 +1,26 @@
+{{ define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+{{ block "head" .}}
+<title>无题</title>
+{{end}}
+</head>
+
+<body>
+{{ block "body" .}}
+{{end}}
+</body>
+
+{{ block "run" .}}
+{{ end }}
+
+<foot>
+{{ block "foot" .}}
+{{end}}
+</foot>
+
+</html>
+
+{{ end }}
