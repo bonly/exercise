@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+    <div id="app" v-cloak>
+        <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">websocket</a>
+                </div>
+                <div>
+                        <button v-on:click="Cnt" type="button" class="btn btn-default navbar-btn">
+                           连接
+                        </button>
+                        <button v-on:click="Send" type="button" class="btn btn-default navbar-btn">
+                           发送
+                        </button>
+                        <button v-on:click="Discnt" type="button" class="btn btn-default navbar-btn">
+                           断开
+                        </button>
+                </div>
+                </div>
+        </nav>
+    </div>
+    <script type="text/javascript" src="cli.js"></script>
+</body>
+
+</html>
