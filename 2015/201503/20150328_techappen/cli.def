@@ -1,0 +1,5 @@
+LIBRARY clidef
+EXPORTS
+Run @ 1
+Exit @ 2
+Proc @ 3

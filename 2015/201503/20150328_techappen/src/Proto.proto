@@ -1,0 +1,33 @@
+syntax="proto3";
+
+package proto;
+
+service User {
+  rpc Login (ReqLogin) returns (RepLogin) {}
+  rpc Register (ReqRegister) returns (RepRegister){}
+}
+
+message ReqLogin {
+  string name = 1;
+  string passwd = 2;
+}
+
+message RepLogin {
+  int32 ret = 1;
+  string msg = 2;
+}
+
+message ReqRegister {
+  string name = 1;
+  string passwd = 2;
+}
+
+message RepRegister {
+  int32 ret = 1;
+  string msg = 2;
+  string id = 3;
+}
+
+service Game{
+  rpc Logout (ReqLogin) returns (RepLogin) {}
+}
