@@ -1,0 +1,34 @@
+{======================================================}
+{公式名称：全天候时段量比（分钟/日线及以上完美兼容版）}
+{核心逻辑：利用PERIOD函数分离逻辑，分钟线做动态对齐，日线以上做标准量比}
+{======================================================}
+
+{1. 判断当前周期：PERIOD=5到10代表1分钟到120分钟}
+IS_MINUTE := (PERIOD >= 5) AND (PERIOD <= 10);
+
+{--- 分支A：日线及以上周期直接使用标准量比逻辑 ---}
+{日线不需要“同时段对齐”，本质就是今天总量比过去5日均量}
+LB_DAY := V / REF(MA(V, 5), 1);
+
+{--- 分支B：分钟线专属的“历史同时段动态对齐”逻辑 ---}
+{计算今天走到第几根}
+TODAY_BARS := BARSLAST(DATE != REF(DATE, 1)) + 1;
+{动态获取过去5个交易日的总K线数}
+Y1 := REF(TODAY_BARS, TODAY_BARS);
+Y2 := REF(Y1, TODAY_BARS);
+Y3 := REF(Y2, TODAY_BARS);
+Y4 := REF(Y3, TODAY_BARS);
+Y5 := REF(Y4, TODAY_BARS);
+{精准偏移获取历史同时段量}
+V_1 := REF(V, Y1);
+V_2 := REF(V, Y1 + Y2);
+V_3 := REF(V, Y1 + Y2 + Y3);
+V_4 := REF(V, Y1 + Y2 + Y3 + Y4);
+V_5 := REF(V, Y1 + Y2 + Y3 + Y4 + Y5);
+HIST_MAV5 := (V_1 + V_2 + V_3 + V_4 + V_5) / 5;
+{防错处理}
+LB_MINUTE := IF(BARSCOUNT(V) > 50 AND Y5 > 0 AND HIST_MAV5 > 0, V / HIST_MAV5, DRAWNULL);
+
+{2. 最终输出：根据周期自动切换}
+{如果是分钟线，输出分钟量比；如果是日线以上，输出日线量比}
+单根时段量比: IF(IS_MINUTE, LB_MINUTE, LB_DAY), COLORRED, LINETHICK2;

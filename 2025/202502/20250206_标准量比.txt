@@ -1,0 +1,30 @@
+{======================================================}
+{公式名称：全周期标准量比（终极兼容版）}
+{核心逻辑：分钟线走时间折算，日线及以上走周期总量对比}
+{适用周期：1分钟到年线全周期}
+{======================================================}
+
+{--- 判断当前周期类型 ---}
+IS_MINUTE := (PERIOD >= 5) AND (PERIOD <= 10); {5-10代表1分钟到120分钟}
+
+{=== 分支A：分钟周期算法（时间折算）===}
+TODAY_BARS := BARSLAST(DATE != REF(DATE, 1)) + 1;
+TODAY_VOL := SUM(VOL, TODAY_BARS);
+HIST_MAV5_MIN := REF(MA(VOL, 5), 1)#DAY; {跨周期引用日线均量}
+MIN_PER_BAR := IF(PERIOD=5, 1, IF(PERIOD=6, 5, IF(PERIOD=7, 15, 
+               IF(PERIOD=8, 30, IF(PERIOD=9, 60, IF(PERIOD=10, 120, 1))))));
+TODAY_MINS := TODAY_BARS * MIN_PER_BAR;
+LB_MINUTE := TODAY_VOL / (HIST_MAV5_MIN / 240 * TODAY_MINS);
+
+{=== 分支B：日线及以上算法（无需折算）===}
+HIST_MAV5_DAY := REF(MA(VOL, 5), 1);
+LB_DAY := VOL / HIST_MAV5_DAY;
+
+{--- 最终输出：自动切换 ---}
+{加防错机制，防止新股或数据不足时出现乱码}
+标准量比: IF(BARSCOUNT(V) > 5,
+           IF(IS_MINUTE, 
+              IF(HIST_MAV5_MIN > 0 AND TODAY_MINS > 0, LB_MINUTE, DRAWNULL),
+              IF(HIST_MAV5_DAY > 0, LB_DAY, DRAWNULL)
+             ),
+           DRAWNULL), COLORRED, LINETHICK2;
